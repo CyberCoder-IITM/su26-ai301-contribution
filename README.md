@@ -1,16 +1,18 @@
 # su26-ai301-contribution
 # Contribution [#]: [Issue Title]
 
-**Contribution Number:** [1 / 2 / 3]  
-**Student:** [Your Name]  
-**Issue:** [GitHub issue link]  
-**Status:** [Phase I / Phase II / Phase III / Phase IV] [In Progress / Complete]
+**Contribution Number:** 1 
+**Student:** Saleeq Adnan Syed
+**Issue:** https://github.com/backstage/community-plugins/issues/9188 
+**Status:** Phase I — In Progress
 
 ---
 
 ## Why I Chose This Issue
 
-[1-2 paragraphs explaining why this issue interests you, how it matches your skills/learning goals, what you hope to learn]
+ I chose issue #9188 in the backstage/community-plugins repository because it is a well-scoped TypeScript feature addition with clear acceptance criteria. The azure-devops readme plugin currently forces users to manually define the `dev.azure.com/readme-path` annotation for every entity in a monorepo, even when a README.md already exists next to the catalog-info.yaml file.
+
+This matches my TypeScript experience and my goal of contributing to a large, production-grade open source project. "Done" is clearly defined: the annotation becomes optional when README.md is co-located with catalog-info.yaml. The original requester also expressed willingness to collaborate, and the maintainer added `help wanted` last week — signaling active interest in a PR.
 
 ---
 
@@ -18,19 +20,19 @@
 
 ### Problem Description
 
-[In your own words, what's broken or missing?]
+The azure-devops-readme plugin requires users to explicitly set `dev.azure.com/readme-path` for every entity. In monorepos where each component has its own README.md next to catalog-info.yaml, this creates unnecessary repetitive configuration.
 
 ### Expected Behavior
 
-[What should happen?]
+The plugin should auto-detect README.md at the same directory level as catalog-info.yaml and use it as a fallback when no explicit annotation is provided.
 
 ### Current Behavior
 
-[What actually happens?]
+Without the `dev.azure.com/readme-path` annotation, the plugin does not display any README — even when one exists right next to the catalog-info.yaml.
 
 ### Affected Components
 
-[Which parts of the codebase are involved?]
+The azure-devops workspace inside backstage/community-plugins, specifically the readme plugin's path resolution logic.
 
 ---
 
