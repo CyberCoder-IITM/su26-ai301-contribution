@@ -2,8 +2,11 @@
 # Contribution [#]: [Issue Title]
 
 **Contribution Number:** 1 
+
 **Student:** Saleeq Adnan Syed
+
 **Issue:** https://github.com/backstage/community-plugins/issues/9188 
+
 **Status:** Phase I — In Progress
 
 ---
