@@ -7,7 +7,7 @@
 
 **Issue:** https://github.com/backstage/community-plugins/issues/9188 
 
-**Status:** Phase III — Complete | Awaiting Maintainer Review
+**Status:** Phase III - Complete | Awaiting Maintainer Review
 
 **PR:** https://github.com/backstage/community-plugins/pull/9703
 
