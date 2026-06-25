@@ -7,7 +7,9 @@
 
 **Issue:** https://github.com/backstage/community-plugins/issues/9188 
 
-**Status:** Phase II — Complete
+**Status:** Phase III — Complete | Awaiting Maintainer Review
+
+**PR:** https://github.com/backstage/community-plugins/pull/9703
 
 ---
 
@@ -87,7 +89,7 @@ const readmePath =
 - **Branch:** https://github.com/CyberCoder-IITM/community-plugins/tree/feat/azure-devops-readme-auto-detect-9188
 - **Test run:** 21/21 existing tests passing with scaffold in place — zero regressions
 
-- **Commit showing reproduction:** [Link to commit in your fork]
+- **Commit showing reproduction:** https://github.com/CyberCoder-IITM/community-plugins/commit/2cd14f4ac
 - **Screenshots/logs:** [If applicable]
 - **My findings:** [What you discovered during reproduction]
 
@@ -182,6 +184,35 @@ https://github.com/CyberCoder-IITM/community-plugins/tree/feat/azure-devops-read
 - Confirm no crash when both annotations are absent
 
 ---
+## Phase III — Solution Building
+
+**Status:** ✅ Complete
+
+**What I built:**
+
+Completed the full implementation of README.md auto-detection for backstage/community-plugins#9188. Modified `getAnnotationValuesFromEntity()` in `plugin-azure-devops-common` to fall back to `backstage.io/source-location` when `dev.azure.com/readme-path` is absent. The fallback extracts the Azure DevOps `path` query parameter and resolves `README.md` in the same directory as the catalog file. Non-Azure URLs, malformed values, and absent annotations all return `undefined` gracefully with zero regressions. Expanded the test suite from 21 to 29 tests (8 new cases). Updated plugin documentation, filed changesets for both affected packages, and addressed Copilot review feedback.
+
+**Key commits:**
+- [`258569207`](https://github.com/CyberCoder-IITM/community-plugins/commit/258569207) — feat: implement readme path auto-detection from source-location
+- [`13edbdea6`](https://github.com/CyberCoder-IITM/community-plugins/commit/13edbdea6) — test: add 8 new tests (29/29 passing)
+- [`154cde897`](https://github.com/CyberCoder-IITM/community-plugins/commit/154cde897) — docs: document README auto-detection from source-location
+- [`d94505ed6`](https://github.com/CyberCoder-IITM/community-plugins/commit/d94505ed6) — chore: add changeset for azure-devops plugin docs update
+- [`fd3918c46`](https://github.com/CyberCoder-IITM/community-plugins/commit/fd3918c46) — fix: address Copilot review comments (hostname exact match + slash guard)
+
+**Test Results:** 29/29 passing (0 regressions)
+
+**Files modified:**
+- `workspaces/azure-devops/plugins/azure-devops-common/src/utils/getAnnotationValuesFromEntity.ts`
+- `workspaces/azure-devops/plugins/azure-devops-common/src/utils/getAnnotationValuesFromEntity.test.ts`
+- `workspaces/azure-devops/plugins/azure-devops/README.md`
+- `workspaces/azure-devops/.changeset/rich-comics-complain.md`
+- `workspaces/azure-devops/.changeset/shy-bulldogs-grow.md`
+
+**Maintainer Feedback Received:**
+- Copilot AI flagged 2 issues: hostname check too permissive + edge case when path has no slash
+- Both fixed in `fd3918c46` and confirmed with 29/29 tests still passing
+
+---
 
 ## Implementation Notes
 
@@ -232,7 +263,7 @@ https://github.com/CyberCoder-IITM/community-plugins/tree/feat/azure-devops-read
 
 ## Pull Request
 
-**PR Link:** [GitHub PR URL when submitted]
+**PR Link:** https://github.com/backstage/community-plugins/pull/9703
 
 **PR Description:** [Draft or final PR description - much of the content above can be adapted]
 
@@ -241,6 +272,11 @@ https://github.com/CyberCoder-IITM/community-plugins/tree/feat/azure-devops-read
 - [Date]: [How you addressed it]
 
 **Status:** [Awaiting review / Iterating / Approved / Merged]
+
+**Maintainer Feedback:**
+- Copilot AI review flagged 2 issues — both fixed in fd3918c46
+
+**Status:** Open — Awaiting human maintainer review from awanlin
 
 ---
 
