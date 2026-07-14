@@ -199,7 +199,7 @@ Completed the full implementation of README.md auto-detection for backstage/comm
 - [`d94505ed6`](https://github.com/CyberCoder-IITM/community-plugins/commit/d94505ed6) — chore: add changeset for azure-devops plugin docs update
 - [`fd3918c46`](https://github.com/CyberCoder-IITM/community-plugins/commit/fd3918c46) — fix: address Copilot review comments (hostname exact match + slash guard)
 
-**Test Results:** 29/29 passing (0 regressions)
+**Test Results:** 32/32 passing (0 regressions) — final count after multiple review rounds
 
 **Files modified:**
 - `workspaces/azure-devops/plugins/azure-devops-common/src/utils/getAnnotationValuesFromEntity.ts`
@@ -209,8 +209,13 @@ Completed the full implementation of README.md auto-detection for backstage/comm
 - `workspaces/azure-devops/.changeset/shy-bulldogs-grow.md`
 
 **Maintainer Feedback Received:**
-- Copilot AI flagged 2 issues: hostname check too permissive + edge case when path has no slash
-- Both fixed in `fd3918c46` and confirmed with 29/29 tests still passing
+- Copilot AI flagged 2 issues: hostname check too permissive + edge case when path has no slash — both fixed in `fd3918c46`
+- awanlin (maintainer) requested extracting the readme logic into its own function, merging duplicate changesets, and removing an unnecessary hostname restriction — all addressed in `df5da09e5` and `572d874b6`
+- Copilot flagged 3 more edge cases on the refactor (empty-string annotation handling, directory names containing dots, missing regression test for non-Azure URLs) — fixed in `2a3fefe0d`
+- awanlin corrected a design mistake: I had switched to `backstage.io/managed-by-location`, but he clarified that annotation can point at a completely different repo (e.g. a centralized catalog repo), and that `backstage.io/source-location` was the correct choice all along — reverted in `52a81dce8`, with the actual underlying bug (an incorrect filename-stripping assumption) fixed properly this time
+- Copilot flagged a stale changeset description and an inconsistent API-surface issue (`getReadmePath` marked `@public` but not re-exported) — fixed in `c4cf2ef68` and `68dee9ee6`
+
+**Final state:** 32/32 tests passing, all 11 CI checks green, implementation and documentation fully consistent. Currently awaiting `awanlin`'s next review pass.
 
 ---
 
@@ -274,9 +279,11 @@ Completed the full implementation of README.md auto-detection for backstage/comm
 **Status:** [Awaiting review / Iterating / Approved / Merged]
 
 **Maintainer Feedback:**
-- Copilot AI review flagged 2 issues — both fixed in fd3918c46
+- Went through 5 rounds of iteration with both Copilot AI and human maintainer awanlin
+- Key learning: initially misread a maintainer comment and switched to the wrong Backstage annotation (`managed-by-location` instead of `source-location`) — corrected after clarification, with the underlying logic bug fixed properly
+- All feedback addressed; 32/32 tests passing, 11/11 CI checks green
 
-**Status:** Open — Awaiting human maintainer review from awanlin
+**Status:** Open — Awaiting `awanlin`'s next review pass after latest round of fixes
 
 ---
 
